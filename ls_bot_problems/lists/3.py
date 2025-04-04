@@ -20,12 +20,7 @@ O: a new list (of integers)
 """
 
 def string_lengths(strings):
-    string_lengths = []
-
-    for string in strings:
-        string_lengths.append(len(string))
-
-    return string_lengths
+    return [len(string) for string in strings]
 
 # Test cases
 print(string_lengths(['hello', 'world']))          # Expected: [5, 5]
