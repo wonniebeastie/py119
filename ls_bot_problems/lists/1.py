@@ -22,13 +22,8 @@ O: a new list
         [] append num to result
 [] return result
 """
-
 def filter_above_threshold(numbers, threshold):
-    result = []
-    for num in numbers:
-        if num > threshold:
-            result.append(num)
-    return result
+    return [num for num in numbers if num > threshold]
 
 # Test cases
 print(filter_above_threshold([1, 5, 2, 8, 3], 3))  # Expected: [5, 8]
