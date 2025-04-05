@@ -21,14 +21,11 @@ O: a list that is the sum of the input lists
 [] return list1
 """
 def custom_concat(list1, list2):
-    if list2:
-        for element in list2:
-            list1.append(element)
+    for element in list2:
+        list1.append(element)
 
     return list1
 
-
-# Test cases
 print(custom_concat([1, 2], [3, 4]))        # Expected: [1, 2, 3, 4]
 print(custom_concat([], ['a', 'b', 'c']))   # Expected: ['a', 'b', 'c']
 print(custom_concat([True, False], []))     # Expected: [True, False]
