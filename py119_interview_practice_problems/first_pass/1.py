@@ -61,10 +61,7 @@ def count_smaller(num, numbers):
     return count
 
 def smaller_numbers_than_current(numbers):
-    counts = []
-    for num in numbers:
-        counts.append(count_smaller(num, numbers))
-    return counts
+    return [count_smaller(num, numbers) for num in numbers]
 
 print(smaller_numbers_than_current([8, 1, 2, 2, 3]) == [3, 0, 1, 1, 2])
 print(smaller_numbers_than_current([7, 7, 7, 7]) == [0, 0, 0, 0])
