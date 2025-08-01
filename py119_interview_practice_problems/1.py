@@ -28,19 +28,55 @@ Rules:
     - that count is what will go in the new list
 - numbers that appear more than once should only be counted once
 - output list has same length of input list
-
-
-- count = 0
-- unique_values = turn numbers into a set
-- for value in unique_values:
-    - if value < num:
-        - count += 1
-- return count
 """
 
 # APPROACH 1: PRE-CALCULATION & MAP
+"""
+Breakdown:
+- this approach is based on the fundamental properties of a sorted list of
+  unique numbers.
+- if we sort a list of unique numbers in ascending order:
+    - every element at a given index is guaranteed to be larger than all 
+      elements that come before it
+    - list indices are zero-based, so the number of elements that come before
+      any index i is exactly i
+    - ex: [6, 5, 4, 8]
+        - sort [4, 5, 6, 8]
+        - index: 0, num: 4 (there are 0 numbers smaller than 4)
+        - index: 2, num: 6 (there are 2 numbers smaller than 6)
+        - and so on...
+
+Algo:
+- turn into set to get unique numbers 
+    - `set()`
+- sort in ascending order 
+    - `sorted()` function returns a list (name it `sorted_unique_nums`)
+- map the numbers from sorted_unique_nums to their index using a dictionary
+    - keys = numbers
+    - values = index
+    - `enumerate()` since we're working with a list, for both index & value
+    - name it `count_map`
+- result = []
+- for num in numbers (original input list):
+    - get count_map[num] (this gets the associated value for that number)
+    - append it to result
+- return result
+
+Step-Through:
+- [8, 1, 2, 2, 3] 
+- {8, 1, 2, 3} 
+- [1, 2, 3, 8] 
+- {1: 0, 2: 1, 3: 2, 8: 3}
+- iterate through input list, get values (index)
+  [3, 0, 1, 1, 2]
+
+NOTE:
+This dictionary-approach is the most efficient as the input size grows.
+"""
 def smaller_numbers_than_current(numbers):
-    pass
+    sorted_unique_nums = sorted(set(numbers))
+    count_map = {num: idx for idx, num in enumerate(sorted_unique_nums)}
+    return [count_map[num] for num in numbers]
 
 print(smaller_numbers_than_current([8, 1, 2, 2, 3]) == [3, 0, 1, 1, 2])
 print(smaller_numbers_than_current([7, 7, 7, 7]) == [0, 0, 0, 0])
@@ -55,23 +91,11 @@ print(smaller_numbers_than_current(my_list) == result)
 # APPROACH 2: SORT & MAP
 """
 Breakdown:
-- if we sort a list of unique numbers in ascending order:
-    - every element at a given index is guaranteed to be larger than all 
-      elements that come before it
-    - list indices are zero-based, so the number of elements that come before
-      any index i is exactly i
-    - ex: [6, 5, 4, 8]
-        - sort [4, 5, 6, 8]
-        - index: 0, num: 4 (there are 0 numbers smaller than 4)
-        - index: 2, num: 6 (there are 2 numbers smaller than 6)
-        - and so on...
-
-- so we just need to:
-    - create unique list of integers from numbers
-    - sort it in ascending order
-    - iterate through sorted list
-    - get index position for each number
-    - populate new list with the indices
+- create unique list of integers from numbers
+- sort it in ascending order
+- iterate through sorted list
+- get index position for each number
+- populate new list with the indices
 
 Algo:
 unique_nums = numbers turned into a set
@@ -96,7 +120,6 @@ print(smaller_numbers_than_current2([1]) == [0]) # True
 my_list = [1, 4, 6, 8, 13, 2, 4, 5, 4]
 result   = [0, 2, 4, 5, 6, 1, 2, 3, 2]
 print(smaller_numbers_than_current2(my_list) == result) # True
-
 
 
 # APPROACH 3: DIRECT COUNTING
