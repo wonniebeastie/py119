@@ -116,11 +116,9 @@ return counts
 """
 
 def smaller_numbers_than_current2(numbers):
-    unique_nums = sorted(list(set(numbers)))
-    counts = []
-    for num in numbers:
-        counts.append(unique_nums.index(num))
-    return counts
+    sorted_unique_nums = sorted(list(set(numbers)))
+    # For each number in input list, find its index in the sorted, unique version
+    return [sorted_unique_nums.index(num) for num in numbers]
 
 print(smaller_numbers_than_current2([8, 1, 2, 2, 3]) == [3, 0, 1, 1, 2]) # True
 print(smaller_numbers_than_current2([7, 7, 7, 7]) == [0, 0, 0, 0]) # True
