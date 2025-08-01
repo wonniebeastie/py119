@@ -38,50 +38,18 @@ Rules:
 - return count
 """
 
-# APPROACH 1: DIRECT COUNTING
-"""
-Breakdown:
-- need a pared down, unique numbers list to compare each number to
-    + turn into set for unique values
-- new list to gather counts
-
-Main Algo:
-counts = []
-unique_nums = turn numbers into a set
-for num in numbers:
-    append count_smaller(num, unique_nums) to counts
-return counts
-
-Helper Algo:
-I: integer - each value in input list (`num`)
-O: integer - count of how many are smaller than input integer
-GOAL: Count how many values are smaller in a unique set of values
-
-count = 0
-for unique_num in unique_nums:
-    if num is greater than unique_num:
-        increment count by 1
-return count
-"""
-def count_smaller(num, unique_nums):
-    count = 0
-    for unique_num in unique_nums:
-        if num > unique_num:
-            count += 1
-    return count
-
+# APPROACH 1: PRE-CALCULATION & MAP
 def smaller_numbers_than_current(numbers):
-    unique_nums = set(numbers)
-    return [count_smaller(num, unique_nums) for num in numbers]
+    pass
 
-print(smaller_numbers_than_current([8, 1, 2, 2, 3]) == [3, 0, 1, 1, 2]) # True
-print(smaller_numbers_than_current([7, 7, 7, 7]) == [0, 0, 0, 0]) # True
-print(smaller_numbers_than_current([6, 5, 4, 8]) == [2, 1, 0, 3]) # True
-print(smaller_numbers_than_current([1]) == [0]) # True
+print(smaller_numbers_than_current([8, 1, 2, 2, 3]) == [3, 0, 1, 1, 2])
+print(smaller_numbers_than_current([7, 7, 7, 7]) == [0, 0, 0, 0])
+print(smaller_numbers_than_current([6, 5, 4, 8]) == [2, 1, 0, 3])
+print(smaller_numbers_than_current([1]) == [0])
 
 my_list = [1, 4, 6, 8, 13, 2, 4, 5, 4]
 result   = [0, 2, 4, 5, 6, 1, 2, 3, 2]
-print(smaller_numbers_than_current(my_list) == result) # True
+print(smaller_numbers_than_current(my_list) == result)
 
 
 # APPROACH 2: SORT & MAP
@@ -128,3 +96,50 @@ print(smaller_numbers_than_current2([1]) == [0]) # True
 my_list = [1, 4, 6, 8, 13, 2, 4, 5, 4]
 result   = [0, 2, 4, 5, 6, 1, 2, 3, 2]
 print(smaller_numbers_than_current2(my_list) == result) # True
+
+
+
+# APPROACH 3: DIRECT COUNTING
+"""
+Breakdown:
+- need a pared down, unique numbers list to compare each number to
+    + turn into set for unique values
+- new list to gather counts
+
+Main Algo:
+counts = []
+unique_nums = turn numbers into a set
+for num in numbers:
+    append count_smaller(num, unique_nums) to counts
+return counts
+
+Helper Algo:
+I: integer - each value in input list (`num`)
+O: integer - count of how many are smaller than input integer
+GOAL: Count how many values are smaller in a unique set of values
+
+count = 0
+for unique_num in unique_nums:
+    if num is greater than unique_num:
+        increment count by 1
+return count
+"""
+def count_smaller(num, unique_nums):
+    count = 0
+    for unique_num in unique_nums:
+        if num > unique_num:
+            count += 1
+    return count
+
+def smaller_numbers_than_current3(numbers):
+    unique_nums = set(numbers)
+    return [count_smaller(num, unique_nums) for num in numbers]
+
+print(smaller_numbers_than_current3([8, 1, 2, 2, 3]) == [3, 0, 1, 1, 2]) # True
+print(smaller_numbers_than_current3([7, 7, 7, 7]) == [0, 0, 0, 0]) # True
+print(smaller_numbers_than_current3([6, 5, 4, 8]) == [2, 1, 0, 3]) # True
+print(smaller_numbers_than_current3([1]) == [0]) # True
+
+my_list = [1, 4, 6, 8, 13, 2, 4, 5, 4]
+result   = [0, 2, 4, 5, 6, 1, 2, 3, 2]
+print(smaller_numbers_than_current3(my_list) == result) # True
