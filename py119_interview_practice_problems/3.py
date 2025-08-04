@@ -81,3 +81,37 @@ print(to_weird_case('aaA bB c') == 'aaA bB c') # True
 original = "Mary Poppins' favorite word is supercalifragilisticexpialidocious"
 expected = "Mary Poppins' fAvOrItE word is sUpErCaLiFrAgIlIsTiCeXpIaLiDoCiOuS"
 print(to_weird_case(original) == expected) # True
+
+# REFACTORED
+def to_weird_case2(txt):
+    def transform_word(word):
+        """
+        GOAL: uppercase every other character in a word
+        I: a word, as a string
+        O: transformed word as a string
+        """
+        return "".join(
+            char.upper() if idx % 2 != 0 else char
+            for idx, char in enumerate(word)
+        )
+
+    words = txt.split()
+
+    transformed_words = [transform_word(word) if (idx+1) % 3 == 0 else word
+                         for idx, word in enumerate(words)]
+
+    return " ".join(transformed_words)
+
+original = 'Lorem Ipsum is simply dummy text of the printing world'
+expected = 'Lorem Ipsum iS simply dummy tExT of the pRiNtInG world'
+print(to_weird_case2(original) == expected) # True
+
+original = 'It is a long established fact that a reader will be distracted'
+expected = 'It is a long established fAcT that a rEaDeR will be dIsTrAcTeD'
+print(to_weird_case2(original) == expected) # True
+
+print(to_weird_case2('aaA bB c') == 'aaA bB c') # True
+
+original = "Mary Poppins' favorite word is supercalifragilisticexpialidocious"
+expected = "Mary Poppins' fAvOrItE word is sUpErCaLiFrAgIlIsTiCeXpIaLiDoCiOuS"
+print(to_weird_case2(original) == expected) # True
