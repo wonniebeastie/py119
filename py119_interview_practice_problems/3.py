@@ -85,11 +85,6 @@ print(to_weird_case(original) == expected) # True
 # REFACTORED
 def to_weird_case2(txt):
     def transform_word(word):
-        """
-        GOAL: uppercase every other character in a word
-        I: a word, as a string
-        O: transformed word as a string
-        """
         return "".join(
             char.upper() if idx % 2 != 0 else char
             for idx, char in enumerate(word)
