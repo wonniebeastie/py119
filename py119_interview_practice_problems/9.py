@@ -88,7 +88,7 @@ print(count_substrings3('bbbaabbbbaabb', 'bbbaabb') == 1) # True
 """
 This third approach uses manual indexing and an emulation of the do/while loop
 (Python does not have a native one). We use the `.find()` string method to
-look for the index position at which the substring exists in the full string,
+look for the index position at which the substring starts in the full string,
 but using the optional start parameter of where to begin the search.
 
 If the substring is not found, then the find method returns -1. So if it's not 
@@ -96,6 +96,6 @@ found, the loop is broken and we return the current `count`.
 
 But if it is found, then `count` is incremented by 1 and `current_index` is
 assigned the resulting value from adding the index position to the length of
-the substring, which will cause `.find()` to use that "skipped ahead" position
-to begin the search at the next iteration of the loop.
+the substring, which `.find()` will use to "skip ahead" to the position to 
+begin the search at the next iteration of the loop.
 """
